@@ -1,2 +1,6 @@
-DEBUG/obj
+DEBUG/obj/*
+*.o
+*.d
+DEBUG/.gdb_history
+DEBUG/ROBO
 

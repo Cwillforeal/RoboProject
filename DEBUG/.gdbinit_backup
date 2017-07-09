@@ -1,0 +1,4 @@
+set sysroot ~/armeabihf_libs/
+set architecture arm
+target remote 192.168.7.2:1234
+break main()
