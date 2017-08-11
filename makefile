@@ -30,7 +30,7 @@ WARNINGS = -Wall
 #-MMD: Create a .d file and strip away all the directory information
 #-MP: Create phony header files in case one has been removed and the makefile doesn't match yet
 
-CPP_FLAGS = $(INC_PATHS) $(WARNINGS) -O0 -g3 -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)"
+CPP_FLAGS = $(INC_PATHS) $(WARNINGS) -O0 -g3 -std=c++11 -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)"
 
 #Set include paths and files
 INC_PATHS = -I"./inc"
