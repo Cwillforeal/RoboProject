@@ -24,19 +24,21 @@
 
 #ifndef I2C_H_
 #define I2C_H_
-#include"BusDevice.h"
 
 #define BBB_I2C_0 "/dev/i2c-0"
 #define BBB_I2C_1 "/dev/i2c-1"
 
-namespace exploringBB{
+namespace exploringBB {
 
 /**
  * @class I2CDevice
  * @brief Generic I2C Device class that can be used to connect to any type of I2C device and read or write to its registers
  */
-class I2CDevice:public BusDevice{
-
+class I2CDevice{
+private:
+	unsigned int bus;
+	unsigned int device;
+	int file;
 public:
 	I2CDevice(unsigned int bus, unsigned int device);
 	virtual int open();

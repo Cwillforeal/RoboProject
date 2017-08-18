@@ -26,8 +26,8 @@
 #include<iostream>
 #include<sstream>
 #include<fcntl.h>
-#include<iomanip>
 #include<stdio.h>
+#include<iomanip>
 #include<unistd.h>
 #include<sys/ioctl.h>
 #include<linux/i2c.h>
@@ -44,8 +44,10 @@ namespace exploringBB {
  * @param bus The bus number. Usually 0 or 1 on the BBB
  * @param device The device ID on the bus.
  */
-I2CDevice::I2CDevice(unsigned int bus, unsigned int device):
-	BusDevice(bus,device){
+I2CDevice::I2CDevice(unsigned int bus, unsigned int device) {
+	this->file=-1;
+	this->bus = bus;
+	this->device = device;
 	this->open();
 }
 
