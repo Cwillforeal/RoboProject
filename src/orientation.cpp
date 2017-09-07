@@ -8,7 +8,7 @@
 
 //Inits the orientation class 
 Orientation::Orientation(void){
-    mpu9250 = new I2CDevice(1,0x68);
+    mpu9250 = new I2CDevice(2,0x68);
     
     if(mpu9250->readRegister(WHO_AM_I_MPU9250) != 0x71)
     {
@@ -35,8 +35,14 @@ Orientation::Orientation(void){
 }
 
 void Orientation::getAccelData(accel_t* dataOut){
+    int16_t temp_X,temp_Y,temp_Z;
+
     unsigned char *rawData = mpu9250->readRegisters(6,ACCEL_XOUT_H);
-    dataOut->X = ((int16_t)rawData[0] << 8) | rawData[1];
-    dataOut->Y = ((int16_t)rawData[2] << 8) | rawData[3];
-    dataOut->Z = ((int16_t)rawData[4] << 8) | rawData[5];
+    temp_X = (((int16_t)rawData[0] << 8) | rawData[1]);
+    temp_Y = (((int16_t)rawData[2] << 8) | rawData[3]);
+    temp_Z = (((int16_t)rawData[4] << 8) | rawData[5]);
+
+    dataOut->X = (((int32_t)(temp_X))*2000)/G_CONVERT;
+    dataOut->Y = (((int32_t)(temp_Y))*2000)/G_CONVERT;
+    dataOut->Z = (((int32_t)(temp_Z))*2000)/G_CONVERT;
 }

@@ -30,7 +30,7 @@ WARNINGS = -Wall
 #-MMD: Create a .d file and strip away all the directory information
 #-MP: Create phony header files in case one has been removed and the makefile doesn't match yet
 
-CPP_FLAGS = $(INC_PATHS) $(WARNINGS) -O0 -g3 -std=c++11 -static -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)"
+CPP_FLAGS = -static $(INC_PATHS) $(WARNINGS) -O0 -g3 -std=c++11 -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)"
 
 #Set include paths and files
 INC_PATHS = -I"./inc"
@@ -57,7 +57,7 @@ all:
 #Build the executable
 $(BUILD_NAME): $(OBJ_LOCATION)
 	@echo 'Building: $@'
-	$(CCpp) $(LIB_PATHS) -o "DEBUG/$(BUILD_NAME)" $(OBJ_LOCATION) $(LIBS)
+	$(CCpp) -static $(LIB_PATHS) -o "DEBUG/$(BUILD_NAME)" $(OBJ_LOCATION) $(LIBS)
 	@echo 'Finished Building $@'
 
 #Build the cpp sources
@@ -67,7 +67,7 @@ $(OBJ_DIR)/%.o: %.cpp
 	@echo 'Finished Building $@'
 
 clean:
-	-$(CLEAN) $(OBJ_LOCATION) $(BUILD_NAME) $(DEPENDENCIES)
+	-$(CLEAN) $(OBJ_LOCATION) $(DEPENDENCIES) DEBUG/$(BUILD_NAME)
 
 run:
 	$(OBJ_DIR)/$(BUILD_NAME).exe

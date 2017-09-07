@@ -2,11 +2,12 @@
  * orientation.h:  Keeps track for all orientation related stuff
  */
 #define ASCALE 0x00 //2g
+#define G_CONVERT 32768
 
 typedef struct{
-    int16_t X;
-    int16_t Y;
-    int16_t Z;
+    int32_t X;
+    int32_t Y;
+    int32_t Z;
 } accel_t;
 
 class Orientation

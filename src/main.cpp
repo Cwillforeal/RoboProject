@@ -3,11 +3,13 @@
 #include "main.h"
 #include "orientation.h"
 #include <unistd.h>
+#include <iomanip>
 
 int main()
 {
     Orientation orientation;
     accel_t accelData;
+    char esc(27);
 
     while(1){
         orientation.getAccelData(&accelData);
@@ -15,6 +17,7 @@ int main()
         cout << "Y scale data: " << accelData.Y << endl;
         cout << "Z scale data: " << accelData.Z << endl;
         usleep(50000);
+        cout << esc << "[3A\r";
     }
     return 0;
 }
