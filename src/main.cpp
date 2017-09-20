@@ -4,10 +4,13 @@
 #include "orientation.h"
 #include <unistd.h>
 #include <iomanip>
+#include "distance.h"
+
 
 int main()
 {
     Orientation orientation;
+    Distance distance;
     accel_t accelData;
     char esc(27);
 

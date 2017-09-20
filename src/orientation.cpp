@@ -32,6 +32,7 @@ Orientation::Orientation(void){
     c = c | 0x03;  // Set the accelerometer rate to 1 kHz and bandwidth to 41 Hz
     mpu9250->writeRegister(ACCEL_CONFIG2, c);
     this_thread::sleep_for(chrono::milliseconds(100));
+    cout << "Accel initialized" << endl;
 }
 
 void Orientation::getAccelData(accel_t* dataOut){
