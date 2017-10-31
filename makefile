@@ -46,7 +46,8 @@ SRC_CPP = \
     src/orientation.cpp
 
 SRC_C = \
-    external_libs/BME280_driver/bme280.c
+    external_libs/BME280_driver/bme280.c \
+	src/bme280_stubs.c
 
 OBJ_C := $(patsubst %.c, %.o, $(SRC_C)) 
 DEP_C := $(patsubst %.c, %.d, $(SRC_C))
@@ -63,7 +64,8 @@ DEPENDENCIES := $(patsubst %.cpp, $(OBJ_DIR)/%.d, $(notdir $(SRC_CPP)))
 
 #Tell make where to look for source files
 vpath %.cpp ./src/
-vpath %.c ./external_libs/BME280_driver/ 
+vpath %.c ./external_libs/BME280_driver/ \
+          ./src/	
 
 all:
 	$(MAKE) $(BUILD_NAME)
