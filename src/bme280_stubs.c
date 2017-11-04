@@ -11,6 +11,7 @@
 #include <linux/i2c-dev.h>
 #include <unistd.h>
 #include "bme280_defs.h"
+#include <time.h>
 
 #define BB_I2C_0 "/dev/i2c-0"
 #define BB_I2C_1 "/dev/i2c-2"
@@ -50,9 +51,15 @@ int8_t user_init_bme280_i2c(uint8_t bus, uint8_t addr)
     return rslt;
 }
 
-void user_delay_ms(uint32_t period)
+void user_delay_ms(uint32_t milisec)
 {
-
+    struct timespec req={0};
+    time_t sec=(int)(milisec/1000);
+    milisec=milisec-(sec*1000);
+    req.tv_sec=sec;
+    req.tv_nsec=milisec*1000000L;
+    while(nanosleep(&req,&req)==-1)
+        continue;
 }
 
 int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
@@ -66,12 +73,26 @@ int8_t user_i2c_read(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16
         perror("Failed to read registers");
         return -1;
     } 
+    for(uint32_t i = 0; i < len; i++){
+        reg_data[i]=bme280_regs[i];
+    }
     return rslt;
 }
 
 int8_t user_i2c_write(uint8_t dev_id, uint8_t reg_addr, uint8_t *reg_data, uint16_t len)
 {
     int8_t rslt = 0; /* Return 0 for Success, non-zero for failure */
+    uint8_t write_buf[2];
+
+    for(uint32_t i=0; i<len; i++){
+        write_buf[0]=reg_addr+i;
+        write_buf[1]=reg_data[i];
+        if(write(file,write_buf,2)!=2){
+            perror("Failed to write registers");
+            rslt = -1;
+            break;
+        }
+    }
 
     return rslt;
 }
