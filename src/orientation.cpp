@@ -1,4 +1,5 @@
 //orientation.cpp - Contains all the needed parts to setup and detect orientation 
+
 #include "I2CDevice.h"
 #include "main.h"
 #include "MPU9250.h"
@@ -6,7 +7,7 @@
 #include <chrono>
 #include <thread>
 
-//Inits the orientation class 
+//Set up the accelerometer for direction detection
 Orientation::Orientation(void){
     mpu9250 = new I2CDevice(2,0x68);
     
@@ -35,15 +36,12 @@ Orientation::Orientation(void){
     cout << "Accel initialized" << endl;
 }
 
+//Writes the raw accel data to passed struct
+//To convert to Gs multiply by 2000 the divide by 32768
 void Orientation::getAccelData(accel_t* dataOut){
-    int16_t temp_X,temp_Y,temp_Z;
-
-    unsigned char *rawData = mpu9250->readRegisters(6,ACCEL_XOUT_H);
-    temp_X = (((int16_t)rawData[0] << 8) | rawData[1]);
-    temp_Y = (((int16_t)rawData[2] << 8) | rawData[3]);
-    temp_Z = (((int16_t)rawData[4] << 8) | rawData[5]);
-
-    dataOut->X = (((int32_t)(temp_X))*2000)/G_CONVERT;
-    dataOut->Y = (((int32_t)(temp_Y))*2000)/G_CONVERT;
-    dataOut->Z = (((int32_t)(temp_Z))*2000)/G_CONVERT;
+    unsigned char *rawData = mpu9250->readRegisters(6,ACCEL_XOUT_H);  //Get the raw ECG data
+    //Shift up and OR to full 16 bit value
+    dataOut->X = (((int32_t)rawData[0] << 8) | rawData[1]);  
+    dataOut->Y = (((int32_t)rawData[2] << 8) | rawData[3]);
+    dataOut->Z = (((int32_t)rawData[4] << 8) | rawData[5]);
 }

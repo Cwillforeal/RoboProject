@@ -1,8 +1,6 @@
-/*
- * orientation.h:  Keeps track for all orientation related stuff
- */
+//orientation.h:  Keeps track for all orientation related stuff
+
 #define ASCALE 0x00 //2g
-#define G_CONVERT 32768
 
 typedef struct{
     int32_t X;
