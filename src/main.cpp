@@ -1,26 +1,20 @@
-//This is a super basic example.
-#include <iostream>
+//This is a super basic example.  
+#include <iostream> 
 #include "main.h"
 #include "orientation.h"
 #include <unistd.h>
 #include <iomanip>
 #include "distance.h"
+#include "drive.h"
 
 
 int main()
 {
-    Orientation orientation;
+    Orientation orientation;  //TODO: Show have these throwing errors and catching them here
     Distance distance;
-    accel_t accelData;
-    char esc(27);
+    Drive drive;
 
-    while(1){
-        orientation.getAccelData(&accelData);
-        cout << "X scale data: " << accelData.X << endl;
-        cout << "Y scale data: " << accelData.Y << endl;
-        cout << "Z scale data: " << accelData.Z << endl;
-        usleep(50000);
-        cout << esc << "[3A\r";
-    }
+	cout << "Device initialized, entering run mode" << endl;
+
     return 0;
 }

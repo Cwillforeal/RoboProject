@@ -43,7 +43,8 @@ SRC_CPP = \
     src/distance.cpp \
     src/I2CDevice.cpp \
     src/main.cpp \
-    src/orientation.cpp
+    src/orientation.cpp \
+	src/drive.cpp
 
 SRC_C = \
     external_libs/BME280_driver/bme280.c \

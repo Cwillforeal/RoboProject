@@ -56,12 +56,4 @@ Distance::Distance(void){
     }
 
     cout << "BME280 Initialized" <<endl;
-
-    while (1) {
-        /* Delay while the sensor completes a measurement */
-        dev.delay_ms(70);
-        rslt = bme280_get_sensor_data(BME280_ALL, &comp_data, &dev);
-        cout << "Temp : "<<comp_data.temperature<<", Humidity: "<<comp_data.humidity<<", Pressure: "<<comp_data.pressure<<endl;
-    }
-
 }
