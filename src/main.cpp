@@ -15,6 +15,10 @@ int main()
     Drive drive;
 
 	cout << "Device initialized, entering run mode" << endl;
+    
+    while(1)
+    {
 
+    }
     return 0;
 }

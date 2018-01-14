@@ -39,7 +39,7 @@ Orientation::Orientation(void){
 //Writes the raw accel data to passed struct
 //To convert to Gs multiply by 2000 the divide by 32768
 void Orientation::getAccelData(accel_t* dataOut){
-    unsigned char *rawData = mpu9250->readRegisters(6,ACCEL_XOUT_H);  //Get the raw ECG data
+    unsigned char *rawData = mpu9250->readRegisters(6,ACCEL_XOUT_H);  //Get the raw accel data
     //Shift up and OR to full 16 bit value
     dataOut->X = (((int32_t)rawData[0] << 8) | rawData[1]);  
     dataOut->Y = (((int32_t)rawData[2] << 8) | rawData[3]);
