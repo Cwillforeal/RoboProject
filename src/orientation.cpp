@@ -37,11 +37,22 @@ Orientation::Orientation(void){
 }
 
 //Writes the raw accel data to passed struct
-//To convert to Gs multiply by 2000 the divide by 32768
-void Orientation::getAccelData(accel_t* dataOut){
+//To convert to Gs multiply by 2000 then divide by 32768
+void Orientation::readAccelData(accel_t &dataOut){
     unsigned char *rawData = mpu9250->readRegisters(6,ACCEL_XOUT_H);  //Get the raw accel data
     //Shift up and OR to full 16 bit value
-    dataOut->X = (((int32_t)rawData[0] << 8) | rawData[1]);  
-    dataOut->Y = (((int32_t)rawData[2] << 8) | rawData[3]);
-    dataOut->Z = (((int32_t)rawData[4] << 8) | rawData[5]);
+    dataOut.X = (((int16_t)rawData[0] << 8) | rawData[1]);  
+    dataOut.Y = (((int16_t)rawData[2] << 8) | rawData[3]);
+    dataOut.Z = (((int16_t)rawData[4] << 8) | rawData[5]);
+}
+
+
+void Orientation::convertAccelData(accel_t &data){
+    data.X = (((int16_t)(data.X))*2000)/G_CONVERT;
+    data.Y = (((int16_t)(data.Y))*2000)/G_CONVERT;
+    data.Z = (((int16_t)(data.Z))*2000)/G_CONVERT;
+}
+
+void Orientation::printAccelData(accel_t data){
+    cout << "DATA::: X = " << data.X << ", Y = " << data.Y << ", Z = " << data.Z << "\r\n";
 }

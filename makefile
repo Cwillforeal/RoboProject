@@ -65,7 +65,7 @@ DEPENDENCIES := $(patsubst %.cpp, $(OBJ_DIR)/%.d, $(notdir $(SRC_CPP)))
 
 #Tell make where to look for source files
 vpath %.cpp ./src/
-vpath %.c ./external_libs/BME280_driver/ \
+vpath %.c ./external_libs/ \
           ./src/	
 
 all:
