@@ -45,6 +45,9 @@ Drive::Drive(void){
     left_wheel.open("/sys/class/pwm/pwmchip0/pwm1/enable");
     left_wheel << "1";
     left_wheel.close();
+    right_wheel.open("/sys/class/pwm/pwmchip0/pwm0/enable");
+    right_wheel << "1";
+    right_wheel.close();
 
     //Setup gpio base settings
     gpio_left.open("/sys/class/gpio/gpio30/direction");
