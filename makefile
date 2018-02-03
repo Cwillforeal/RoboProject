@@ -1,7 +1,7 @@
 #*************************************************************************************************/
 #*-------------------------------------------PROLOGUE--------------------------------------------*/
 #*
-#* Makefile: For monitor_dxe Unit Testing
+#* Makefile: For Bouy Bot 
 #*
 
 
@@ -33,7 +33,7 @@ WARNINGS = -Wall
 CPP_FLAGS = -static $(INC_PATHS) $(WARNINGS) -O0 -g3 -std=c++11 -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)"
 
 #Set include paths and files
-INC_PATHS = -I./inc -I./external_libs/BME280_driver
+INC_PATHS = -I./inc -I./external_libs
 
 BUILD_NAME = ROBO
 
@@ -47,7 +47,7 @@ SRC_CPP = \
 	src/drive.cpp
 
 SRC_C = \
-    external_libs/BME280_driver/bme280.c \
+    external_libs/bme280.c \
 	src/bme280_stubs.c
 
 OBJ_C := $(patsubst %.c, %.o, $(SRC_C)) 
