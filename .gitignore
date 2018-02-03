@@ -4,4 +4,6 @@ DEBUG/obj/*
 DEBUG/.gdb_history
 DEBUG/ROBO
 *.swp
+*.swn
+*.swo
 
