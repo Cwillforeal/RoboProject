@@ -46,9 +46,10 @@ int main()
         // //         drive.forward_left();
         //         drive.reverse_right();}}      
 
-        orientation.readAccelData(newaccell);
-        orientation.convertAccelData(newaccell);
-        orientation.printAccelData(newaccell);
+        // orientation.readAccelData(newaccell);
+        // orientation.convertAccelData(newaccell)->display();
+        orientation.readGyroData(newaccell);
+        orientation.convertAccelData(newaccell)->display();
 
     }
     return 0;
