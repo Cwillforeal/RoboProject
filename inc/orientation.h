@@ -23,6 +23,7 @@ class Orientation
 {
     private:
         I2CDevice * mpu9250;
+        float pitch;
     public:
         Orientation(void);
         void readAccelData(accel_t &dataOut);
@@ -30,4 +31,5 @@ class Orientation
         Data *convertAccelData(accel_t &data);
         Data *convertGyroData(accel_t &data);
         void printAccelData(accel_t data);
+        float getPitch(void);
 };
