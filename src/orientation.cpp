@@ -73,17 +73,17 @@ void Orientation::readGyroData(accel_t &dataOut){
 
 Data *Orientation::convertAccelData(accel_t &data){
     Data *values = new Data();
-    values->x = (float)(((int16_t)(data.X))*2000)/G_CONVERT;
-    values->y = (float)(((int16_t)(data.Y))*2000)/G_CONVERT;
-    values->z = (float)(((int16_t)(data.Z))*2000)/G_CONVERT;
+    values->x = (float)(((int16_t)(data.X))*2)/G_CONVERT;
+    values->y = (float)(((int16_t)(data.Y))*2)/G_CONVERT;
+    values->z = (float)(((int16_t)(data.Z))*2)/G_CONVERT;
     return values;
 }
 
 Data *Orientation::convertGyroData(accel_t &data){
     Data *values = new Data();
-    values->x = (float)(((int16_t)(data.X))*2500)/G_CONVERT;
-    values->y = (float)(((int16_t)(data.Y))*2500)/G_CONVERT;
-    values->z = (float)(((int16_t)(data.Z))*2500)/G_CONVERT;
+    values->x = (float)(((int16_t)(data.X))*250)/G_CONVERT;
+    values->y = (float)(((int16_t)(data.Y))*250)/G_CONVERT;
+    values->z = (float)(((int16_t)(data.Z))*250)/G_CONVERT;
     return values;
 }
 

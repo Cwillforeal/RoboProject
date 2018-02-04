@@ -30,17 +30,17 @@ Drive::Drive(void){
         exit(-1);}
    
     //Setup pwm base settings 
-    left_wheel.open("/sys/class/pwm/pwmchip0/pwm1/period");
-    left_wheel << "1000000000";
-    left_wheel.close();
     left_wheel.open("/sys/class/pwm/pwmchip0/pwm1/duty_cycle");
     left_wheel << "0";
     left_wheel.close();
-    right_wheel.open("/sys/class/pwm/pwmchip0/pwm0/period");
-    right_wheel << "1000000000";
-    right_wheel.close();
+    left_wheel.open("/sys/class/pwm/pwmchip0/pwm1/period");
+    left_wheel << to_string(WHEEL_PERIOD);
+    left_wheel.close();
     right_wheel.open("/sys/class/pwm/pwmchip0/pwm0/duty_cycle");
     right_wheel << "0";
+    right_wheel.close();
+    right_wheel.open("/sys/class/pwm/pwmchip0/pwm0/period");
+    right_wheel << to_string(WHEEL_PERIOD);
     right_wheel.close();
     left_wheel.open("/sys/class/pwm/pwmchip0/pwm1/enable");
     left_wheel << "1";

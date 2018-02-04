@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 
-#define WHEEL_PERIOD 1000000000
+#define WHEEL_PERIOD 1000000
 
 class Drive{
     private:
