@@ -14,6 +14,7 @@ class Drive{
         ofstream gpio_right;
     public:
         Drive(void);
+        ~Drive(void);
         void reverse_left(void);
         void reverse_right(void);
         void forward_left(void);

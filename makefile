@@ -22,7 +22,7 @@ $(shell mkdir -p $(OBJ_DIR))
 
 #Libraries and Paths
 LIB_PATHS =
-LIBS      =
+LIBS      = -lpthread
 
 #Set the Warnings level
 WARNINGS = -Wall
@@ -44,7 +44,9 @@ SRC_CPP = \
     src/I2CDevice.cpp \
     src/main.cpp \
     src/orientation.cpp \
-	src/drive.cpp
+	src/drive.cpp \
+	src/pid.cpp \
+	src/input_thread.cpp
 
 SRC_C = \
     external_libs/bme280.c \

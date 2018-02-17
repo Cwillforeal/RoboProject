@@ -93,3 +93,8 @@ void Drive::set_speed_right(int speed){
     right_wheel << to_string(speed);
     right_wheel.close();}
 
+Drive::~Drive(void){
+    cout << "HERE" <<endl;
+    this->set_speed_left(0);
+    this->set_speed_right(0);}
+
