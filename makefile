@@ -46,6 +46,7 @@ SRC_CPP = \
     src/orientation.cpp \
 	src/drive.cpp \
 	src/pid.cpp \
+	src/test.cpp \
 	src/input_thread.cpp
 
 SRC_C = \

@@ -100,14 +100,18 @@ float Orientation::getPitch(void){
     Data *accel_data;
     this->readGyroData(raw_data);
     gyro_data = this->convertGyroData(raw_data); 
+    // gyro_data->display();
     this->readAccelData(raw_data);
     accel_data = this->convertAccelData(raw_data);
+    // accel_data->display();
 
     this->pitch += gyro_data->y*0.005;
     float accel_mag = abs(accel_data->x) + abs(accel_data->y) + abs(accel_data->z);
     if(accel_mag > 0.5 && accel_mag < 2.0){
         float pitch_accel = atan2f(accel_data->z, (-1*accel_data->x))*180/(3.14159265);
-        this->pitch = this->pitch*0.90 + pitch_accel*0.1;}
+        this->pitch = this->pitch*0.90 + pitch_accel*0.1;
+    }
 
-   return this->pitch;} 
+   return this->pitch;
+} 
 

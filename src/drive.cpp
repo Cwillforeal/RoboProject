@@ -20,6 +20,7 @@ Drive::Drive(void){
     gpio_right << "31";
     gpio_right.close();
 
+    /* UMMM don't hink this ever executes the bracketed material. */
     if(!opendir("/sys/class/gpio/gpio30"));{
         cout << "Failed to open gpio for direct" << endl;}
     if(!opendir("/sys/class/gpio/gpio31"));{
@@ -34,13 +35,13 @@ Drive::Drive(void){
     left_wheel << "0";
     left_wheel.close();
     left_wheel.open("/sys/class/pwm/pwmchip0/pwm1/period");
-    left_wheel << to_string(WHEEL_PERIOD);
+    left_wheel << to_string(DRIVE_PERIOD);
     left_wheel.close();
     right_wheel.open("/sys/class/pwm/pwmchip0/pwm0/duty_cycle");
     right_wheel << "0";
     right_wheel.close();
     right_wheel.open("/sys/class/pwm/pwmchip0/pwm0/period");
-    right_wheel << to_string(WHEEL_PERIOD);
+    right_wheel << to_string(DRIVE_PERIOD);
     right_wheel.close();
     left_wheel.open("/sys/class/pwm/pwmchip0/pwm1/enable");
     left_wheel << "1";
@@ -61,40 +62,48 @@ Drive::Drive(void){
     gpio_right.open("/sys/class/gpio/gpio31/value");
     gpio_right << "1";
 
-    cout << "PWM and motors initialized" <<endl;}
+    cout << "PWM and motors initialized" <<endl;
+}
 
 void Drive::reverse_left(){
     gpio_left.open("/sys/class/gpio/gpio30/value");
     gpio_left << "0";
-    gpio_left.close();}
+    gpio_left.close();
+}
 
 void Drive::reverse_right(){
     gpio_right.open("/sys/class/gpio/gpio31/value");
     gpio_right << "0";
-    gpio_right.close();}
+    gpio_right.close();
+}
 
 void Drive::forward_left(){
     gpio_left.open("/sys/class/gpio/gpio30/value");
     gpio_left << "1";
-    gpio_left.close();}
+    gpio_left.close();
+}
 
 void Drive::forward_right(){
     gpio_right.open("/sys/class/gpio/gpio31/value");
     gpio_right << "1";
-    gpio_right.close();}
+    gpio_right.close();
+}
 
 void Drive::set_speed_left(int speed){
     left_wheel.open("/sys/class/pwm/pwmchip0/pwm1/duty_cycle");
     left_wheel << to_string(speed);
-    left_wheel.close();}
+    left_wheel.close();
+}
     
 void Drive::set_speed_right(int speed){
     right_wheel.open("/sys/class/pwm/pwmchip0/pwm0/duty_cycle");
     right_wheel << to_string(speed);
-    right_wheel.close();}
+    right_wheel.close();
+}
 
 Drive::~Drive(void){
     cout << "HERE" <<endl;
     this->set_speed_left(0);
-    this->set_speed_right(0);}
+    this->set_speed_right(0);
+}
 

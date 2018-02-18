@@ -3,7 +3,9 @@
 #include <string>
 #include <fstream>
 
-#define WHEEL_PERIOD 1000000
+#define DRIVE_PERIOD 1000
+
+#define DRIVE_SPEED_PERCENT(x)      DRIVE_PERIOD*(x/100)
 
 class Drive{
     private:
